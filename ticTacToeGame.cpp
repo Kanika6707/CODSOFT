@@ -3,7 +3,7 @@ using namespace std;
 char space[3][3]={{'1','2','3'},{'4','5','6'},{'7','8','9'}};
 int row;
 int column;
-char token ='x';
+char token ='X';
 bool tie=false;
 string n1;
 string n2;
@@ -28,11 +28,11 @@ void functionone(){
 
 void functiontwo(){
     int digit;
-    if(token=='x'){
+    if(token=='X'){
         cout<<n1<<"please enter";
         cin>>digit; 
     }
-    if(token=='0'){
+    if(token=='O'){
         cout<<n2<<"please enter";
         cin>>digit;
     }
@@ -73,15 +73,17 @@ void functiontwo(){
         column=2;
     }
     else if(digit<1 || digit>9){
-        cout<<"invalid !!! \n";
+        cout<<"invalid !!! choice please enter number between 1 to 9 \n";
+        functiontwo();
+        return;
     }
-    if(token=='x' && space[row][column]!='x' && space[row][column]!='0'){
+    if(token=='X' && space[row][column]!='X' && space[row][column]!='O'){
         space[row][column]='x';
-        token='0';
+        token='O';
     }
-    else if(token=='0' && space[row][column]!='x' && space[row][column]!='0'){
-        space[row][column]='0';
-        token='x';
+    else if(token=='O' && space[row][column]!='X' && space[row][column]!='O'){
+        space[row][column]='O';
+        token='X';
     }
     else{
         cout<<"there is no empty space"<<endl;
@@ -104,7 +106,7 @@ bool functionthree(){
     }    
     for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
-               if(space[i][j]!='x' && space[i][j]!='0'){
+               if(space[i][j]!='X' && space[i][j]!='O'){
                 return false;
             } 
         }
@@ -135,7 +137,7 @@ int main() {
             }
         }
 
-        token = 'x';
+        token = 'X';
         tie = false;
 
         cout << "\nEnter name of the first person: ";
@@ -152,6 +154,11 @@ int main() {
         while (!functionthree()) {
             functiontwo();
 
+            if (functionthree()) {
+                break;   
+            }
+
+
             if (tie) {
                 break;
             }
@@ -160,7 +167,7 @@ int main() {
         if (tie == true) {
             cout << "Draw!!\n";
         }
-        else if (token == 'x') {
+        else if (token == 'X') {
             cout << n2 << " Wins!!\n";
         }
         else {
